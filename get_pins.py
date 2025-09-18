@@ -92,9 +92,6 @@ class GetPinsTestCase(unittest.TestCase):
         )
 
 
-from math import prod
-
-
 def get_pins(observed):
     neiboughrs = {
         "1": ["1", "2", "4"],
@@ -108,17 +105,30 @@ def get_pins(observed):
         "9": ["6", "8", "9"],
         "0": ["8", "0"],
     }
-    length = prod([len(neiboughrs[e]) for e in observed])
-    pin_list = [observed]
-    while len(pin_list) < length:
-        for item in pin_list:
-            for i in range(len(observed)):
+    pin_list = []
+    for i in range(len(observed)):
+        if len(pin_list) == 0:
+            for letter in neiboughrs[observed[i]]:
+                pin_list.append(letter)
+        else:
+            temp_list = []
+            for pin in pin_list:
                 for letter in neiboughrs[observed[i]]:
-                    observed_list = [e for e in item]
-                    observed_list[i] = letter
+                    observed_list = [e for e in pin]
+                    observed_list.append(letter)
                     temp = "".join(observed_list)
-                    if temp not in pin_list:
-                        pin_list.append(temp)
+                    temp_list.append(temp)
+            pin_list = temp_list
+
+    # while len(pin_list) < length:
+    #     for item in pin_list:
+    #         for i in range(len(observed)):
+    #             for letter in neiboughrs[observed[i]]:
+    #                 observed_list = [e for e in item]
+    #                 observed_list[i] = letter
+    #                 temp = "".join(observed_list)
+    #                 if temp not in pin_list:
+    #                     pin_list.append(temp)
     return sorted(pin_list)
 
 
