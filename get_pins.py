@@ -120,6 +120,18 @@ def get_pins(observed):
                     temp_list.append(temp)
             pin_list = temp_list
 
+<<<<<<< HEAD
+=======
+    # while len(pin_list) < length:
+    #     for item in pin_list:
+    #         for i in range(len(observed)):
+    #             for letter in neiboughrs[observed[i]]:
+    #                 observed_list = [e for e in item]
+    #                 observed_list[i] = letter
+    #                 temp = "".join(observed_list)
+    #                 if temp not in pin_list:
+    #                     pin_list.append(temp)
+>>>>>>> 08288353680eedf091bb54b31f80107eed7160f0
     return sorted(pin_list)
 
 
