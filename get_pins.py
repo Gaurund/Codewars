@@ -42,13 +42,13 @@ import unittest
 class GetPinsTestCase(unittest.TestCase):
 
     def test_get_pins(self):
-        self.assertEqual(get_pins("8"), ["5", "7", "8", "9", "0"])
+        self.assertEqual(get_pins("8"), sorted(["5", "7", "8", "9", "0"]))
         self.assertEqual(
-            get_pins("11"), ["11", "22", "44", "12", "21", "14", "41", "24", "42"]
-        )
+            get_pins("11"), sorted(["11", "22", "44", "12", "21", "14", "41", "24", "42"]
+        ))
         self.assertEqual(
             get_pins("369"),
-            [
+            sorted([
                 "339",
                 "366",
                 "399",
@@ -85,10 +85,10 @@ class GetPinsTestCase(unittest.TestCase):
                 "298",
                 "236",
                 "239",
-            ],
+            ]),
         )
 
-
+from math import prod
 def get_pins(observed):
     neiboughrs = {
         "1": ["1", "2", "4"],
@@ -102,17 +102,33 @@ def get_pins(observed):
         "9": ["6", "8", "9"],
         "0": ["8", "0"],
     }
-    pin_list = [observed]
+    length = prod([len(neiboughrs[e]) for e in observed])
+    pin_list = list()
+    # for i in range(length):
+    #     pin_list.append(observed)
     for n in observed:
-        for i in neiboughrs[n]:
-            temp = observed.replace(n, i)
-            if temp not in pin_list:
-                pin_list.append(temp)
-    return pin_list
+        count = 0
+        while count < length:
+            for letter in neiboughrs[observed[observed.index(n)]]:
+                if count >= len(pin_list):
+                    pin_list.append(letter)
+                else:
+                    pin_list[count] += letter
+                count += 1
+
+    # length = len(observed)
+    # for i in range(length):
+    #     print(i, length)
+    #     for letter in neiboughrs[observed[i]]:
+    #         print(letter)
+    #         temp = observed.replace(observed[i], letter)
+    #         if temp not in pin_list:
+    #             pin_list.append(temp)
+    return sorted(pin_list)
             
 
 
 
 # unittest.main()
-
-print(get_pins("12")) # 12: [12, 22, 42, 11, 21, 41, 13, 23, 43, 15, 25, 45]
+# get_pins("12")
+# print(get_pins("12")) # 12: [12, 22, 42, 11, 21, 41, 13, 23, 43, 15, 25, 45]
