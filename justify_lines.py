@@ -59,7 +59,6 @@ nulla et dolor."""
         self.assertEqual(justify(" ".join(text.split()), 30), text)
 
 
-
 def justify(text, width) -> str:
     result = ""
     text_arr: list = text.split(" ")
@@ -68,22 +67,24 @@ def justify(text, width) -> str:
         string_len = sum([len(w) + 1 for w in string])
         if (string_len + len(word)) > width:
             spaces = width - sum([len(w) for w in string])
-            while spaces:
-                for i in range(len(string)-1):
-                    if spaces > 0:
-                        string[i] += " "
-                        spaces -= 1
+            if len(string) > 1:
+                while spaces:
+                    for i in range(len(string) - 1):
+                        if spaces > 0:
+                            string[i] += " "
+                            spaces -= 1
             for w in string:
                 result = result + w
             result = result + "\n"
             string = [word]
         else:
             string.append(word)
-    for i in range(len(string)-1):
+    for i in range(len(string) - 1):
         string[i] += " "
     for w in string:
-        result = result + w 
+        result = result + w
 
     return result
+
 
 unittest.main()
