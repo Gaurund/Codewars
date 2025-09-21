@@ -66,7 +66,7 @@ def justify(text, width) -> str:
     for word in text_arr:
         string_len = sum([len(w) + 1 for w in string])
         if (string_len + len(word)) > width:
-            spaces = width - sum([len(w) for w in string])
+            spaces = width - sum(map(len, string))
             if len(string) > 1:
                 while spaces:
                     for i in range(len(string) - 1):

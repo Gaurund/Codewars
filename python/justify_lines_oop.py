@@ -65,7 +65,6 @@ class Word:
         self.vol: str = word
         self.length: int = len(word)
         self.space: int = 0
-        self.islast: bool = False
 
     def render(self):
         return f"{self.vol + " " * self.space}"
