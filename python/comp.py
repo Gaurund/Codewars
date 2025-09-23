@@ -81,17 +81,11 @@ class TestComp(unittest.TestCase):
 import math
 
 
-def comp(arr1, arr2) -> bool:
-    if arr1 is None or arr2 is None or not len(arr1) == len(arr2):
+def comp(arr1: list, arr2: list) -> bool:
+    try:
+        return sorted([e*e for e in arr1]) == sorted(arr2)
+    except:
         return False
-    arr1 = [abs(e) for e in arr1]
-    for n2 in arr2:
-        count2 = arr2.count(n2)
-        n1 = math.sqrt(n2)
-        count1 = arr1.count(n1)
-        if not count1 == count2:
-            return False
-    return True
 
 
 unittest.main()
