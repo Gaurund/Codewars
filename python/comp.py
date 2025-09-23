@@ -78,7 +78,6 @@ class TestComp(unittest.TestCase):
         self.assertEqual(comp(c1, c2), False)
 
 
-
 def comp(arr1: list, arr2: list) -> bool:
     try:
         return sorted([e*e for e in arr1]) == sorted(arr2)
