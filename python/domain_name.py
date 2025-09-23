@@ -10,6 +10,3 @@ For example:
 def domain_name(url: str) -> str:
     return url.split("/")[2].split(".")[::-1][1]
 
-url =["http://www.zombie-bites.com", "http://github.com/carbonfive/raygun", "https://www.cnet.com"]
-for u in url:
-    print(domain_name(u))

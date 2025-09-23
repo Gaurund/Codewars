@@ -15,8 +15,3 @@ def generate_hashtag(s):
     if s == "":
         return False
     return f"#{"".join(s.strip().title().split(" "))}"
-
-
-s = " Hello there thanks for trying my Kata   "
-
-print(generate_hashtag(s))

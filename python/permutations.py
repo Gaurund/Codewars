@@ -26,9 +26,6 @@ Good luck!
 import itertools
 
 
-s = 'aabb'
-
 def permutations(s):
     return set(["".join(_) for _ in itertools.permutations(s, len(s))])
 
-print(permutations(s))

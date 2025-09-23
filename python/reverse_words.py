@@ -27,5 +27,4 @@ def reverse_words_not_mine(str):
     r =' '.join(s[::-1] for s in str.split(' '))
     return r
 
-print(reverse_words_not_mine(test_string))
     

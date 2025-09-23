@@ -17,7 +17,6 @@ Last line should not be justified, use only one space between words.
 Lines with one word do not need gaps ('somelongword\n').
 """
 
-from dataclasses import dataclass
 import unittest
 
 
