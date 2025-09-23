@@ -84,7 +84,7 @@ import math
 def comp(arr1, arr2) -> bool:
     if arr1 is None or arr2 is None or not len(arr1) == len(arr2):
         return False
-    arr3 = list()
+    arr1 = [abs(e) for e in arr1]
     for n2 in arr2:
         count2 = arr2.count(n2)
         n1 = math.sqrt(n2)
