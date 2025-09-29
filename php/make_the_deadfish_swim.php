@@ -22,14 +22,18 @@ function parse($data)
     $num = 0;
 
   for ($i = 0; $i < strlen($data); $i++) {
-    if ($data[$i] == "i") {
-      $num += 1;
-    } elseif ($data[$i] == "d") {
-      $num -= 1;
-    } elseif ($data[$i] == "s") {
-      $num *= $num;
-    } elseif ($data[$i] == "o") {
-      array_push($arr, $num);
+    switch($data[$i]) {
+      case "i": 
+        $num += 1;
+        break;
+      case "d":
+        $num -= 1;
+        break;
+      case "s":
+        $num *= $num;
+        break;
+      case "o":
+        array_push($arr, $num);
     }
   }
   return $arr;
