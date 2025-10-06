@@ -11,3 +11,22 @@ Please note that using encode is considered cheating."""
 
 import unittest
 
+class RotTest(unittest.TestCase):
+    def test_rot(self):
+        self.assertEqual(rot13('test'), 'grfg', 'Returned solution incorrect for fixed string = test')
+        self.assertEqual(rot13('Test'), 'Grfg', 'Returned solution incorrect for fixed string = Test')
+        self.assertEqual(rot13('aA bB zZ 1234 *!?%'), 'nN oO mM 1234 *!?%', 'Returned solution incorrect for fixed string = aA bB zZ 1234 *!?%')
+
+def rot13(message):
+    fro = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    to = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
+    result = ""
+    for char in message:
+        substitude = char
+        if char in fro:
+            substitude = to[fro.index(char)]
+        result += substitude
+    return result
+
+unittest.main()
+
