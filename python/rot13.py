@@ -22,10 +22,7 @@ def rot13(message):
     to = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
     result = ""
     for char in message:
-        substitude = char
-        if char in fro:
-            substitude = to[fro.index(char)]
-        result += substitude
+        result += to[fro.index(char)] if char.isalpha() else char
     return result
 
 unittest.main()
