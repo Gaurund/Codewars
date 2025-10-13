@@ -17,10 +17,7 @@
 
 -- -- To aid the scribes, return the firstname and lastname column concatenated, 
 -- separated by a space, into a single shortlist column, and capitalise the first letter of each name.
-
-SELECT CONCAT_WS(' ', 
-                 OVERLAY(firstname placing UPPER(LEFT(firstname,1)) FROM 1),
-                 OVERLAY(lastname placing UPPER(LEFT(lastname,1)) FROM 1)
-                 ) AS shortlist 
-FROM elves 
-WHERE firstname LIKE '%tegil%' OR lastname LIKE '%astar%';
+SELECT initcap(firstname || ' ' || lastname) AS shortlist
+  FROM elves
+ WHERE firstname LIKE '%tegil%'
+    OR lastname LIKE '%astar%'
