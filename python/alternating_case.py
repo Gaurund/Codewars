@@ -9,15 +9,7 @@ uppercase and each uppercase letter becomes lowercase.
 import codewars_test as test
 
 def to_alternating_case(string):
-    result = ""
-    s_list = list(string)
-    for letter in s_list:
-        if letter.isupper():
-            l = letter.lower()
-        else:
-            l = letter.upper()
-        result = result + l
-    return result 
+    return "".join([l.lower() if l.isupper() else l.upper() for l in list(string)] )
 
 @test.describe("Basic tests")
 def test_bacics():
