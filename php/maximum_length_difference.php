@@ -25,21 +25,12 @@ function cmp($a, $b)
 
 function mxdiflg($a1, $a2)
 {
-    $size_of_a1 = count($a1);
-    $size_of_a2 = count($a2);
-    if ($size_of_a1 == 0 || $size_of_a2 == 0) {
+    if (empty($a1) || empty($a2)) {
         return -1;
     }
-    usort($a1, "cmp");
-    usort($a2, "cmp");
-
-    $a1_first = $a1[0];
-    $a2_first = $a2[0];
-    $a1_last = $a1[$size_of_a1 - 1];
-    $a2_last = $a2[$size_of_a2 - 1];
-
-    $max = max((strlen($a1_last) - strlen($a2_first)), (strlen($a2_last) - strlen($a1_first)));
-    return $max;
+    $a1 = array_map("strlen", $a1);
+    $a2 = array_map("strlen", $a2);
+    return max((max($a1) - min($a2)), max($a2) - min($a1));
 }
 
 $s1 = ["hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz"];
