@@ -18,3 +18,4 @@ function flatten_and_sort($array) {
     sort($arr);
     return $arr;
 }
+
