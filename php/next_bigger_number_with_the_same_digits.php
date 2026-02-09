@@ -13,7 +13,7 @@ If the digits can't be rearranged to form a bigger number, return -1 (or nil in 
 
 <?php
 
-function numbers_to_array($n)
+function number_to_array($n)
 {
     $arr = array();
     while ($n > 0) {
@@ -23,37 +23,33 @@ function numbers_to_array($n)
     return $arr;
 }
 
+function array_to_number($arr) {
+    $n = 0;
+    for($i = 0; $i < count($arr); $i++){
+        $n += pow(10, $i) * $arr[$i];
+    }
+    return $n;
+}
+
 function nextBigger($n)
 {
-    $init_arr = numbers_to_array($n);
-    var_dump($init_arr);
-    echo '<br/>--- ';
+    $init_arr = number_to_array($n);
     $buff_arr = [$init_arr[0]];
-    var_dump($buff_arr);
-    echo '<br/>+++ ';
     $i = 1;
     while ($i < count($init_arr)) {
         $buff_arr[$i] = $init_arr[$i];
         if ($buff_arr[$i] < $buff_arr[$i - 1]) {
-            // Если число полученное меньше предыдущего, то надо начать перестановку
-            // Надо запомнить последнее полученное число
             $last = $buff_arr[$i];
-            // Надо отсортировать весь массив по убыванию
-            sort($buff_arr);
-            $buff_arr = array_reverse($buff_arr);
-            // Надо найти то последнее полученное число в массиве.
+            rsort($buff_arr);
             $needle_key = array_search($last, $buff_arr);
-            // Извлечь число перед ним
-            // Ещё раз отсортировать массив по убыванию
             $needle = array_splice($buff_arr, $needle_key - 1, 1);
-            // Добавить в конец массива извлечённое ранее число
-            $buff_arr[] = $needle;
-            // Заменить в исходном массиве поиндексно значения взяв новые из буфферного массива
+            $buff_arr[] = $needle[0];
             array_splice($init_arr, 0, count($buff_arr), $buff_arr);
             $i = count($init_arr);
         }
         $i++;
     }
-
-    return $n;
+    $final_num = array_to_number($init_arr);
+    
+    return $n != $final_num ? $final_num : -1;
 }
