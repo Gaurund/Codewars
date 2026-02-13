@@ -26,7 +26,6 @@ function snail(array $array): array
 
     for ($k = 0; $k < $limit; $k++) {
         $snail[] = $array[$i][$j];
-        $x = count($array[0]);
         if ($i <= $j + 1 && $i + $j < $x - 1) {
             $j++;
         } elseif ($i < $j && $i + $j >= $y - 1) {
