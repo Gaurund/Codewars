@@ -25,36 +25,18 @@ function snail(array $array): array
     $limit = $y * $x;
 
     for ($k = 0; $k < $limit; $k++) {
-        var_dump($array[$i][$j]);
-        echo '<br>';
-        if (($j >= $i && ($j != $x - 1 ))) {
+        $snail[] = $array[$i][$j];
+        $x = count($array[0]);
+        if ($i <= $j + 1 && $i + $j < $x - 1) {
             $j++;
-        } elseif ($i < $j && $i != $y - 1) {
+        } elseif ($i < $j && $i + $j >= $y - 1) {
             $i++;
-        } elseif ($j <= $i && $j > 0) {
+        } elseif ($i >= $j && $i + $j > $x - 1) {
             $j--;
-        } elseif ($i > $j + 1) {
+        } else {
             $i--;
         }
     }
-
-    // for ($k = 0; $k < $limit; $k++) {
-    //     if ($i < $y && $j < $x) {
-    //         $snail[] = $array[$i][$j];
-    //         var_dump($array[$i][$j]);
-    //         echo '<br>';
-    //         // echo 'First IF<br/>';
-    //         if ($j >= $i && $j != $x) {
-    //             $j++;
-    //         } elseif ( $j >= $i && $i != $y){
-    //             $i++;
-    //         }
-    //     } else {
-    //         $i = 0;
-    //         // $j = 0;
-    //         // echo 'First ELSE<br/>';
-    //     }
-    // }
 
     return $snail;
 }
