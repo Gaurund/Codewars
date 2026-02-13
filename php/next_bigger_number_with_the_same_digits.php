@@ -23,9 +23,10 @@ function number_to_array($n)
     return $arr;
 }
 
-function array_to_number($arr) {
+function array_to_number($arr)
+{
     $n = 0;
-    for($i = 0; $i < count($arr); $i++){
+    for ($i = 0; $i < count($arr); $i++) {
         $n += pow(10, $i) * $arr[$i];
     }
     return $n;
@@ -35,8 +36,7 @@ function nextBigger($n)
 {
     $init_arr = number_to_array($n);
     $buff_arr = [$init_arr[0]];
-    $i = 1;
-    while ($i < count($init_arr)) {
+    for ($i = 1; $i < count($init_arr); $i++) {
         $buff_arr[$i] = $init_arr[$i];
         if ($buff_arr[$i] < $buff_arr[$i - 1]) {
             $last = $buff_arr[$i];
@@ -47,9 +47,8 @@ function nextBigger($n)
             array_splice($init_arr, 0, count($buff_arr), $buff_arr);
             $i = count($init_arr);
         }
-        $i++;
     }
     $final_num = array_to_number($init_arr);
-    
+
     return $n != $final_num ? $final_num : -1;
 }
