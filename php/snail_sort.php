@@ -22,25 +22,39 @@ function snail(array $array): array
     $snail = [];
     $y = count($array);
     $x = count($array[0]);
-    $limit = pow(count($array), 2);
+    $limit = $y * $x;
 
     for ($k = 0; $k < $limit; $k++) {
-        if ($i < $y && $j < $x) {
-            $snail[] = $array[$i][$j];
-            var_dump($array[$i][$j]);
-            echo '<br>';
-            // echo 'First IF<br/>';
-            if ($j >= $i && $j != $x) {
-                $j++;
-            } elseif ( $j >= $i && $i != $y){
-                $i++;
-            }
-        } else {
-            $i = 0;
-            // $j = 0;
-            // echo 'First ELSE<br/>';
+        var_dump($array[$i][$j]);
+        echo '<br>';
+        if (($j >= $i && ($j != $x - 1 ))) {
+            $j++;
+        } elseif ($i < $j && $i != $y - 1) {
+            $i++;
+        } elseif ($j <= $i && $j > 0) {
+            $j--;
+        } elseif ($i > $j + 1) {
+            $i--;
         }
     }
 
-    return [1];
+    // for ($k = 0; $k < $limit; $k++) {
+    //     if ($i < $y && $j < $x) {
+    //         $snail[] = $array[$i][$j];
+    //         var_dump($array[$i][$j]);
+    //         echo '<br>';
+    //         // echo 'First IF<br/>';
+    //         if ($j >= $i && $j != $x) {
+    //             $j++;
+    //         } elseif ( $j >= $i && $i != $y){
+    //             $i++;
+    //         }
+    //     } else {
+    //         $i = 0;
+    //         // $j = 0;
+    //         // echo 'First ELSE<br/>';
+    //     }
+    // }
+
+    return $snail;
 }
