@@ -26,13 +26,5 @@ output = ["Open", "Open", "Senior", "Open", "Open", "Senior"] -->
 
 function open_or_senior(array $data): array
 {
-    $output = array();
-    foreach ($data as $pair) {
-        if ($pair[0] < 55 || $pair[1] < 8) {
-            $output[] = "Open";
-        } else {
-            $output[] = "Senior";
-        }
-    }
-    return $output;
+    return array_map(fn($pair) => $pair[0] < 55 || $pair[1] < 8 ? "Open" : "Senior", $data);
 }
