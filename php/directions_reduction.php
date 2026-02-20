@@ -14,10 +14,15 @@ Hence the result path is itself : ["NORTH", "WEST", "SOUTH", "EAST"].
 
 <?php
 
-function dirReduc($arr) {
-    for ($i = 0; $i < count($arr); $i++){
-        if ($i < count($arr) -2 && (($arr[$i] = "NORTH" && $arr[$i+1]="SOUTH") || ($arr[$i] = "WEST" && $arr[$i+1])="EAST"))
-    }
+define('CHECK_DIR', ['NORTH' => 'SOUTH', 'SOUTH' => 'NORTH', 'WEST' => 'EAST', 'EAST' => 'WEST']);
 
-    return $arr
+function dirReduc($arr)
+{
+    for ($i = 0; $i < count($arr); $i++) {
+        if ($i < count($arr) - 1 && $arr[$i + 1] == CHECK_DIR[$arr[$i]]) {
+            array_splice($arr, $i, 2);
+            $arr = dirReduc($arr);
+        }
+    }
+    return $arr;
 }
