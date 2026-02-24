@@ -68,11 +68,8 @@ function thirt($n)
 {
     $arr = number_to_array($n);
     $out = 0;
-    for ($i = 0, $j = 0; $i < count($arr); $i++) {
-        if ($j == count(SEQUENCE)) {
-            $j = 0;
-        }
-        $out += $arr[$i] * SEQUENCE[$j++];
+    for ($i = 0; $i < count($arr); $i++) {
+        $out += $arr[$i] * SEQUENCE[$i%6];
     }
     if ($out == $n){
         return $out;
