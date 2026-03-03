@@ -20,8 +20,6 @@
 function nbDig(n, d) {
     let counter = 0;
     for (i = 0; i <= n; i++) {
-        let s = String(i * i);
-        counter += (s.match(new RegExp(d, "g")) || []).length;
-    }
+        counter += ((i * i).toString().match(new RegExp(d, "g")) || []).length;    }
     return counter;
 }
