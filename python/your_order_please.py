@@ -15,16 +15,7 @@ Examples
 
 """
 
-import re
-
-
 def order(sentence):
-    if sentence == "":
-        return sentence
-    words = {re.findall(r"\d+", word)[0]: word for word in sentence.split(" ")}
-    output = list()
-    for i in range(1, len(words) + 1):
-        output.append(words[str(i)])
-    return " ".join(output)
+    return " ".join(sorted(sentence.split(" "), key=lambda c:sorted(c)))
 
 
