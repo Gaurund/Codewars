@@ -102,7 +102,7 @@ def parser(tokens: list, lang: str) -> str:
     return text
 
 
-def formatter(description: str, lang: str, limit: int = 80):
+def formatter(description: str, lang: str, limit: int = 80) -> str:
     paragraphs = description.split("\n")
     result = list()
     for para in paragraphs:
@@ -123,28 +123,49 @@ def formatter(description: str, lang: str, limit: int = 80):
             result.append(para)
     return f'{comment[lang][0]}{"\n".join(result)}{comment[lang][1]}'
 
+
+def save_new(path: Path, text: str) -> None:
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+
+def validate(abs_path, folder, name, extension) -> Path:
+    while True:
+        path = abs_path / folder / (name + extension)
+        if not path.is_file():
+            return path
+        print_alarm("Файл с подобным именем уже существует.")
+        name = input("Введите новое имя: ")
+        name = clean_name(name)
+
+
+def make_path(name: str, lang: str) -> Path:
+    abs_path = Path(sys.argv[0]).resolve().parent.parent
+    folder, extension = languages.get(lang, ["", ".txt"])
+    cleaned_name = clean_name(name)
+    path = validate(abs_path, folder, cleaned_name, extension)
+    return path
+
+
 def main(url: str) -> None:
     lang = url.split("/")[-1]
     page = load_page(url)
-    
     challenge_name, description = get_info(page)
-    
+    path = make_path(challenge_name, lang)
     tokens = tokenizer(description)
     parsed = parser(tokens, lang)
     formatted = formatter(parsed, lang)
+    save_new(path, formatted)
 
-    abs_path = Path(sys.argv[0]).resolve().parent.parent
-    cleaned_name = clean_name(challenge_name)
-    folder, extension = languages.get(lang, ["", ".txt"])
-    
-    path = abs_path / folder / (cleaned_name + extension)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(formatted)
+
+def print_alarm(msg: str) -> None:
+    print(f'{"*" * (len(msg) + 4)}\n* {msg} *\n{"*" * (len(msg) + 4)}')
+
 
 if __name__ == "__main__":
     try:
         url = sys.argv[1]
     except IndexError:
-        print("*"*54 + "\n* Необходим полный адрес страницы на сайте CodeWars! *\n" + "*"*54)
+        print_alarm("Необходим полный адрес страницы с заданием на сайте CodeWars!")
     else:
         main(url)
