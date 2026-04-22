@@ -123,26 +123,28 @@ def formatter(description: str, lang: str, limit: int = 80):
             result.append(para)
     return f'{comment[lang][0]}{"\n".join(result)}{comment[lang][1]}'
 
-def make_file(filename: str, key: str) -> None:
-    abs_path = Path(sys.argv[0]).resolve().parent.parent
-    san_filename = clean_name(filename)
-    path = abs_path / folder / (san_filename + extension)
-    path.touch()
-
-if __name__ == "__main__":
-    url = sys.argv[1]
+def main(url: str) -> None:
     lang = url.split("/")[-1]
     page = load_page(url)
+    
     challenge_name, description = get_info(page)
+    
     tokens = tokenizer(description)
     parsed = parser(tokens, lang)
     formatted = formatter(parsed, lang)
-    
+
     abs_path = Path(sys.argv[0]).resolve().parent.parent
     cleaned_name = clean_name(challenge_name)
     folder, extension = languages.get(lang, ["", ".txt"])
+    
     path = abs_path / folder / (cleaned_name + extension)
-    # path.touch()
     with open(path, "w", encoding="utf-8") as f:
         f.write(formatted)
 
+if __name__ == "__main__":
+    try:
+        url = sys.argv[1]
+    except IndexError:
+        print("*"*54 + "\n* Необходим полный адрес страницы на сайте CodeWars! *\n" + "*"*54)
+    else:
+        main(url)
